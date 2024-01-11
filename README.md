@@ -1,5 +1,19 @@
-# AirBnB Clone - The Console
-The console is the first segment of the AirBnB project at Holberton School that will collectively cover fundamental concepts of higher level programming. The goal of AirBnB project is to eventually deploy our server a simple copy of the AirBnB Website(HBnB). A command interpreter is created in this segment to manage objects for the AirBnB(HBnB) website.
+# AirBnB_clone_v4 - Web dynamic
+This project use JQuery on the previous code versions of the AirBnB(HBnB) [website](https://www.airbnb.com/) clone project that started from the console (command interpreter), followed by Web static, MySQL, Deploy static, Web Framework, RESTful API and now Web dynamic.
+## More Info
+### Import JQuery
+```html
+<head>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+```
+
+## Install [flasgger](https://github.com/flasgger/flasgger) before starting the API
+```
+$ sudo apt-get install -y python3-lxml
+$ sudo pip3 install flask_cors # if it was not installed yet
+$ sudo pip3 install flasgger
+```
 
 #### Functionalities of this command interpreter:
 * Create a new object (ex: a new User or a new Place)
@@ -14,6 +28,7 @@ The console is the first segment of the AirBnB project at Holberton School that 
 * [File Descriptions](#file-descriptions)
 * [Usage](#usage)
 * [Examples of use](#examples-of-use)
+* [RESTful API usage](#restful-api-usage)
 * [Bugs](#bugs)
 * [Authors](#authors)
 * [License](#license)
@@ -150,14 +165,78 @@ EOF  all  create  destroy  help  quit  show  update
 (hbnb) quit
 ```
 
+## RESTful API usage
+```
+$ HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db HBNB_API_HOST=0.0.0.0 HBNB_API_PORT=5000 python3 -m api.v1.app
+ * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+...
+```
+In another terminal:
+```
+$ curl -X GET http://0.0.0.0:5000/api/v1/status
+{
+  "status": "OK"
+}
+$
+$ curl -X GET http://0.0.0.0:5000/api/v1/stats
+{
+  "amenities": 47,
+  "cities": 36,
+  "places": 154,
+  "reviews": 718,
+  "states": 27,
+  "users": 31
+}
+$
+$ curl -X GET http://0.0.0.0:5000/api/v1/states/
+[
+  {
+    "__class__": "State",
+    "created_at": "2017-04-14T00:00:02",
+    "id": "8f165686-c98d-46d9-87d9-d6059ade2d99",
+    "name": "Louisiana",
+    "updated_at": "2017-04-14T00:00:02"
+  },
+  {
+    "__class__": "State",
+    "created_at": "2017-04-14T16:21:42",
+    "id": "1a9c29c7-e39c-4840-b5f9-74310b34f269",
+    "name": "Arizona",
+    "updated_at": "2017-04-14T16:21:42"
+  },
+...
+$
+$ curl -X GET http://0.0.0.0:5000/api/v1/states/8f165686-c98d-46d9-87d9-d6059ade2d99
+ {
+  "__class__": "State",
+  "created_at": "2017-04-14T00:00:02",
+  "id": "8f165686-c98d-46d9-87d9-d6059ade2d99",
+  "name": "Louisiana",
+  "updated_at": "2017-04-14T00:00:02"
+}
+```
+Other https methods (POST, PUT and DELETE) are also considered
+```
+$ curl -X PUT http://0.0.0.0:5000/api/v1/states/feadaa73-9e4b-4514-905b-8253f36b46f6 -H "Content-Type: application/json" -d '{"name": "California is so cool"}'
+{
+  "__class__": "State",
+  "created_at": "2017-04-15T01:30:28",
+  "id": "feadaa73-9e4b-4514-905b-8253f36b46f6",
+  "name": "California is so cool",
+  "updated_at": "2017-04-15T01:51:08.044996"
+}
+```
+
 ## Bugs
 No known bugs at this time. 
 
 ## Authors
 Alexa Orrico - [Github](https://github.com/alexaorrico) / [Twitter](https://twitter.com/alexa_orrico)  
+David Ovalle - [Github](https://github.com/Nukemenonai) / [Twitter](https://twitter.com/disartDave)
+Fawaz Abdganiyu - [Github](https://github.com/fawazabdganiyu) / [Twitter](https://twitter.com/FAbdganiyu)
+Gabriel Awotubo - [Github](https://github.com/ShegzBit) / [Twitter](https://twitter.com/feranmiawotubo1)
 Jennifer Huang - [Github](https://github.com/jhuang10123) / [Twitter](https://twitter.com/earthtojhuang)  
 Jhoan Zamora - [Github](https://github.com/jzamora5) / [Twitter](https://twitter.com/JhoanZamora10)  
-David Ovalle - [Github](https://github.com/Nukemenonai) / [Twitter](https://twitter.com/disartDave)
 
 Second part of Airbnb: Joann Vuong
 ## License
