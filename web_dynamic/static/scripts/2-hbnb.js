@@ -1,4 +1,10 @@
-$(document).ready(() => {
+$(document).ready(executeScripts);
+
+function executeScripts() {
+  apiStatus();
+}
+
+function apiStatus() {
   $.get('http://0.0.0.0:5001/api/v1/status/', (data, textStatus)=> {
     if (textStatus === 'success' && data.status === 'OK') {
       $('div#api_status').addClass('available');
@@ -6,4 +12,4 @@ $(document).ready(() => {
       $('div#api_status').removeClass('available');
     }
   });
-});
+}
