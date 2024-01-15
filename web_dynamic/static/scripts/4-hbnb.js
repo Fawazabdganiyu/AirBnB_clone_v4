@@ -2,7 +2,6 @@ $(document).ready(executeScripts);
 
 const checkeds = new Set();
 let clicks = 0;
-let amenities = [];
 
 function executeScripts () {
   alert('Document Ready');
@@ -19,11 +18,11 @@ function apiStatus () {
     } else {
       $('div#api_status').removeClass('available');
     }
- });
+  });
 }
 
-function fetchPlaces (amenities=null) {
-  data = (amenities) ? JSON.stringify({amenities}) : JSON.stringify({});
+function fetchPlaces (amenities = null) {
+  const data = (amenities) ? JSON.stringify({ amenities }) : JSON.stringify({});
   if (amenities) { console.log(data); }
   $.ajax({
     url: 'http://0.0.0.0:5001/api/v1/places_search/',
@@ -54,8 +53,6 @@ function fetchPlaces (amenities=null) {
   });
 }
 
-
-
 function getAmenity () {
   alert('Get Amenity Test success');
   $('input[type="checkbox"]').click((event) => {
@@ -84,9 +81,9 @@ function getAmenity () {
 }
 
 function getPlaceByAmenityBtn () {
-	alert('getPlaceByAmenityBtn test Successful');
-	$("button").click(() => {
-		console.log(`Search Button Clicked ${Array.from(checkeds)}`);
-		fetchPlaces(Array.from(checkeds));
-	});
+  alert('getPlaceByAmenityBtn test Successful');
+  $('button').click(() => {
+    console.log(`Search Button Clicked ${Array.from(checkeds)}`);
+    fetchPlaces(Array.from(checkeds));
+  });
 }
