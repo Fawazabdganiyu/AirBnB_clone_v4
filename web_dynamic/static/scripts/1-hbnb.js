@@ -1,27 +1,27 @@
 $(document).ready(() => {
-        const checkeds = new Set();
-	let clicks = 0;
-        $('input[type="checkbox"]').click((event) => {
-		clicks++;
-		const text = $("div.amenities h4").text();
-		const name = event.target.dataset.name;
+  const checkeds = new Set();
+  let clicks = 0;
+  $('input[type="checkbox"]').click((event) => {
+    clicks++;
+    const text = $('div.amenities h4').text();
+    const name = event.target.dataset.name;
+    let nameArray;
 
-		if (event.target.checked) { 
-			checkeds.add(event.target.dataset.id);
-			const main_name = $("div.amenities h4").text();
-			name_array = main_name.split(', ');
-			if (clicks === 1) { name_array = [] }
-			name_array.push(name);
-			$("div.amenities h4").text(name_array.join(', '));
-		} else {
-			checkeds.delete(event.target.dataset.id);
-			const main_name = $("div.amenities h4").text();
-			const name_set = new Set(main_name.split(', '));
-			name_set.delete(name);
-			name_array = Array.from(name_set);
-			$("div.amenities h4").text(name_array.join(', '));
-		}
-		console.log(name_array);
-		console.log(checkeds);
-	});
+    if (event.target.checked) {
+      checkeds.add(event.target.dataset.id);
+      nameArray = text.split(', ');
+      if (clicks === 1) { nameArray.length = 0; }
+      nameArray.push(name);
+      $('div.amenities h4').text(nameArray.join(', '));
+    } else {
+      checkeds.delete(event.target.dataset.id);
+      const mainName = $('div.amenities h4').text();
+      const nameSet = new Set(mainName.split(', '));
+      nameSet.delete(name);
+      nameArray = Array.from(nameSet);
+      $('div.amenities h4').text(nameArray.join(', '));
+    }
+    console.log(nameArray);
+    console.log(checkeds);
+  });
 });
